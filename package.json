@@ -1,6 +1,6 @@
 {
   "name": "lessc-on-save",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Compile and minify LESS stylesheets on save",
   "repository": {
     "type": "git",
