@@ -1,0 +1,22 @@
+{
+  "name": "lessc-on-save",
+  "version": "0.0.0",
+  "description": "Compile and minify LESS stylesheets on save",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/ifcanduela/lessc-on-save"
+  },
+  "activationCommands": {
+    "atom-text-editor": [
+      "core:save"
+    ]
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": "0.206.x"
+  },
+  "dependencies": {
+    "less": "2.x"
+  },
+  "readmeFilename": "README.md"
+}
