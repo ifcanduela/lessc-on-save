@@ -81,13 +81,15 @@ var lesscOnSave = function() {
         var currentFilePath = currentEditor.getPath();
 
         if (currentFilePath.substr(-4).toLowerCase() === "less") {
-            var excludePattern = atom.config.get('lessc-on-save.excludePattern');
+            var excludePattern = atom.config.get('lessc-on-save.excludePattern'),
+                showExcludedMessage = atom.config.get('lessc-on-save.showExcludedMessage');
 
             if (!excludePattern || !path.basename(currentFilePath).match(new RegExp(excludePattern))) {
                 compileFile(currentFilePath);
             } else {
-                atom.notifications.addInfo(currentFilePath + ' is excluded');
-
+                if (showExcludedMessage) {
+                    atom.notifications.addInfo(currentFilePath + ' is excluded');
+                }
             }
         }
     }
@@ -118,6 +120,12 @@ module.exports = {
             description: "Show a message displaying a LESS compilation error on failure",
             type: 'boolean',
             default: true
+        },
+        showExcludedMessage: {
+            title: "Show Exluded Message",
+            description: "Show a message noting that a LESS file was not compiled due to the exclusion filter",
+            type: 'boolean',
+            default: false
         },
         excludePattern: {
             title: "Exclude Pattern",
