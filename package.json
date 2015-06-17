@@ -13,10 +13,10 @@
   },
   "license": "MIT",
   "engines": {
-    "atom": "0.206.x"
+    "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
-    "less": "2.x"
+    "less": ">=2.0 <3.0"
   },
   "readmeFilename": "README.md"
 }
