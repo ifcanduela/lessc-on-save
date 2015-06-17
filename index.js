@@ -131,7 +131,7 @@ module.exports = {
             title: "Exclude Pattern",
             description: "Regular expression to exclude files from compilation",
             type: 'string',
-            default: '^_'
+            default: ''
         }
     },
 
