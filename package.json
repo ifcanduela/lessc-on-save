@@ -8,7 +8,8 @@
   },
   "activationCommands": {
     "atom-text-editor": [
-      "core:save"
+      "core:save",
+      "command-palette:toggle"
     ]
   },
   "license": "MIT",
