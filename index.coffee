@@ -13,15 +13,14 @@ compileFile = (lessFilePath) ->
       filename: lessFilePath
       compress: minifyCss
 
-    throw err unless content
-
     if createSourceMap
       lessOptions.sourceMap = {}
 
     # call the LESS API
     less.render(content, lessOptions).then ((output) ->
       # CSS file name
-      cssFilePath = lessFilePath.substr(0, lessFilePath.lastIndexOf('.')) + '.css'
+      lastPeriod = lessFilePath.lastIndexOf '.'
+      cssFilePath = lessFilePath.substr(0, lastPeriod) + '.css'
       cssWriteError = undefined
 
       # save the CSS file
@@ -78,12 +77,14 @@ showErrorNotification = (error) ->
   showErrorMessage = atom.config.get('lessc-on-save.showErrorMessage')
 
   if showErrorMessage
-    message = error.type + ' error in line ' + error.line + ', column ' + error.column + ':\n\n'
+    message = "#{error.type} error in line #{error.line},
+      column #{error.column}\n\n"
 
     for i of error.extract
-      message += '    ' + error.extract[i] + ' \n'
+      if (error.extract[i])
+        message += "    #{error.extract[i]}  \n"
 
-    message += 'in file ' + error.filename + '\n\n' + error.message
+    message += "in file #{error.filename}\n\n#{error.message}"
     atom.notifications.addError message
 
 # shows a file exclusion notification (depending on setting)
@@ -100,7 +101,7 @@ showSuccessNotification = (filename) ->
   if showSuccessMessage
     atom.notifications.addSuccess 'Compilation successful'
 
-# toggles the automatic compilation settings
+# toggles the automatic compilation setting
 togglePackage = ->
   isPackageEnabled = atom.config.get('lessc-on-save.enabled')
   atom.config.set 'lessc-on-save.enabled', !isPackageEnabled
@@ -140,13 +141,15 @@ module.exports =
       order: 5
     showErrorMessage:
       title: 'Show Error Message'
-      description: 'Show a message displaying a LESS compilation error on failure'
+      description: 'Show a message displaying a LESS compilation error on
+        failure'
       type: 'boolean'
       default: true
       order: 6
     showExcludedMessage:
       title: 'Show Excluded Message'
-      description: 'Show a notification when saving a LESS file that matches the Exclude Pattern'
+      description: 'Show a notification when saving a LESS file that matches
+        the Exclude Pattern'
       type: 'boolean'
       default: false
       order: 7
