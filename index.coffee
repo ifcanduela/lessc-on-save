@@ -19,8 +19,12 @@ compileFile = (lessFilePath) ->
     # call the LESS API
     less.render(content, lessOptions).then ((output) ->
       # CSS file name
-      lastPeriod = lessFilePath.lastIndexOf '.'
-      cssFilePath = lessFilePath.substr(0, lastPeriod) + '.css'
+      currentFolder = path.dirname(lessFilePath)
+      baseName = path.basename(lessFilePath, '.less')
+
+      prefix = atom.config.get('lessc-on-save.cssPrefix')
+
+      cssFilePath = path.resolve(currentFolder + '/' + prefix + baseName + '.css')
       cssWriteError = undefined
 
       # save the CSS file
@@ -153,6 +157,12 @@ module.exports =
       type: 'boolean'
       default: false
       order: 7
+    cssPrefix:
+      title: 'CSS file prefix'
+      description: 'Rename the resulting CSS file using a prefix'
+      type: 'string'
+      default: ''
+      order: 8
 
   activate: ->
     # register the Toggle command
