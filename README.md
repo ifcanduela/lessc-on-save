@@ -14,6 +14,10 @@ Compile LESS stylesheets on save.
 
 ## Changelog
 
+- **v0.5.0**:
+    + Added *Strict Math* setting.
+- **v0.4.0**:
+    + Added *Prefix* setting to modify the destination folder.
 - **v0.3.0**:
     + Added *Enable auto-compilation* setting to globally disable the
         triggering of automatic compilation on save.

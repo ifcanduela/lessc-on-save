@@ -8,10 +8,12 @@ compileFile = (lessFilePath) ->
   readFile lessFilePath, (content) ->
     createSourceMap = atom.config.get('lessc-on-save.createSourceMap')
     minifyCss = atom.config.get('lessc-on-save.minifyCss')
+    strictMath = atom.config.get('lessc-on-save.strictMath')
 
     lessOptions =
       filename: lessFilePath
       compress: minifyCss
+      strictMath: strictMath
 
     if createSourceMap
       lessOptions.sourceMap = {}
@@ -131,38 +133,44 @@ module.exports =
       type: 'boolean'
       default: false
       order: 3
+    strictMath:
+      title: 'Strict math'
+      description: 'Only perform math when expressions are surrounded by parenthesis'
+      type: 'boolean'
+      default: false
+      order: 4
     excludePattern:
       title: 'Exclude Pattern'
       description: 'Regular expression to exclude files from compilation'
       type: 'string'
       default: ''
-      order: 4
+      order: 5
     showSuccessMessage:
       title: 'Show Success Message'
       description: 'Show a successful compilation toast'
       type: 'boolean'
       default: true
-      order: 5
+      order: 6
     showErrorMessage:
       title: 'Show Error Message'
       description: 'Show a message displaying a LESS compilation error on
         failure'
       type: 'boolean'
       default: true
-      order: 6
+      order: 7
     showExcludedMessage:
       title: 'Show Excluded Message'
       description: 'Show a notification when saving a LESS file that matches
         the Exclude Pattern'
       type: 'boolean'
       default: false
-      order: 7
+      order: 8
     cssPrefix:
       title: 'CSS file prefix'
       description: 'Rename the resulting CSS file using a prefix'
       type: 'string'
       default: ''
-      order: 8
+      order: 9
 
   activate: ->
     # register the Toggle command
